@@ -7,7 +7,6 @@ node {
         mvnHome = tool 'M3'
     }
     stage('Build') {
-        
         withEnv(["MVN_HOME=$mvnHome"]) {
             if (isUnix()) {
                 sh '"$MVN_HOME/bin/mvn" -f docker-spring-boot/pom.xml -Dmaven.test.failure.ignore clean package'
@@ -16,7 +15,10 @@ node {
             }
         }
     }
-    stage('Results') {
-       echo "docker build"
+    stage('docker build') {
+        dir("folder") {
+            sh "pwd"
+            sh 'docker build -t spring-boot:1.0 .'
+       } 
     }
 }
