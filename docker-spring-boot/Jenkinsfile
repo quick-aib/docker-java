@@ -21,4 +21,9 @@ node {
             sh 'docker build -t spring-boot:1.0 .'
        } 
     }
+    stage('docker run') {
+        dir("docker-spring-boot") {
+            sh 'docker run -d -p 8082:8080 -t spring-boot:1.0'
+       } 
+    }
 }
