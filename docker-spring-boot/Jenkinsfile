@@ -28,15 +28,17 @@ node {
         sh 'docker push devopsjuly22017/spring-boot:1.0'
       }
     }
-    stage('docker run') {
-        dir("docker-spring-boot") {
-            sh 'docker rm -f sba1'
-//             sh 'docker run -d -p 8083:8080 --name=sba1 -t spring-boot:1.0'
-       } 
-    }
+//     stage('docker run') {
+//         dir("docker-spring-boot") {
+//             sh 'docker rm -f sba1'
+// //             sh 'docker run -d -p 8083:8080 --name=sba1 -t spring-boot:1.0'
+//        } 
+//     }
      stage('kubectrl apply') {
        withCredentials([file(credentialsId: 'KUBECONFIGID', variable: 'KUBECONFIG')]) {
             sh 'kubectl get node'
+            sh 'kubectl run sba --image=devopsjuly22017/spring-boot:1.0 --port=8080'
+            sh 'kubectl expose pod sba --port=81 --target-port=8080 –nodePort=31709 --name=svc1 --type=NodePort'
        }
     }
 }
