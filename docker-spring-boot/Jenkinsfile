@@ -35,9 +35,8 @@ node {
        } 
     }
      stage('kubectrl apply') {
-        dir("docker-spring-boot") {
+       withCredentials([file(credentialsId: 'KUBECONFIGID', variable: 'KUBECONFIG')]) {
             sh 'kubectl get node'
-
-       } 
+       }
     }
 }
