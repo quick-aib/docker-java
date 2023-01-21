@@ -18,7 +18,7 @@ node {
     stage('docker build') {
         dir("docker-spring-boot") {
             sh "pwd"
-            sh 'docker build -t spring-boot:1.0 .'
+            sh 'docker build -t spring-boot:2.0 .'
        } 
     }
     stage('docker push') {
