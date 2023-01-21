@@ -35,11 +35,13 @@ node {
 //        } 
 //     }
      stage('kubectrl apply') {
-       withCredentials([file(credentialsId: 'KUBECONFIGID', variable: 'KUBECONFIG')]) {
-            sh 'kubectl get node'
-            //sh 'kubectl run sba --image=devopsjuly22017/spring-boot:1.0 --port=8080'
-            //sh 'kubectl expose pod sba --port=81 --target-port=8080 –nodePort=31710 --name=svc1 --type=NodePort'
-            sh 'kubectl apply -f springboot-k8s-deployment.yml'
+       dir("docker-spring-boot") {
+           withCredentials([file(credentialsId: 'KUBECONFIGID', variable: 'KUBECONFIG')]) {
+                sh 'kubectl get node'
+                //sh 'kubectl run sba --image=devopsjuly22017/spring-boot:1.0 --port=8080'
+                //sh 'kubectl expose pod sba --port=81 --target-port=8080 –nodePort=31710 --name=svc1 --type=NodePort'
+                sh 'kubectl apply -f springboot-k8s-deployment.yml'
+           }
        }
     }
 }
