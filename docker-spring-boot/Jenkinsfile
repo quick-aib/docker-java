@@ -19,15 +19,15 @@ node {
         dir("docker-spring-boot") {
             sh "pwd"
             VERSION = readMavenPom().getVersion()
-            echo "VERSION: ${VERSION}"
-            sh 'docker build -t spring-boot:2.0 .'
+            echo "VERSION: ${VERSION}  $env:BUILD_NUMBER "
+            sh 'docker build -t spring-boot:$env:BUILD_NUMBER .'
        } 
     }
     stage('docker push') {
       withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
         sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-        sh 'docker tag spring-boot:2.0 devopsjuly22017/spring-boot:2.0'
-        sh 'docker push devopsjuly22017/spring-boot:2.0'
+        sh 'docker tag spring-boot:$env:BUILD_NUMBER devopsjuly22017/spring-boot:$env:BUILD_NUMBER'
+        sh 'docker push devopsjuly22017/spring-boot:$env:BUILD_NUMBER'
       }
     }
 //     stage('docker run') {
