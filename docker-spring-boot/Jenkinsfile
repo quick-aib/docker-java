@@ -18,7 +18,7 @@ node {
     stage('docker build') {
         dir("docker-spring-boot") {
             sh "pwd"
-            sh 'MVN_VERSION=$("$MVN_HOME/bin/" -q -Dexec.executable=echo -Dexec.args='${project.version}' --non-recursive exec:exec)'
+            sh 'MVN_VERSION=$("$MVN_HOME/bin/mvn" -q -Dexec.executable=echo -Dexec.args="${project.version}" --non-recursive exec:exec)'
             sh 'echo $MVN_VERSION'
             sh 'docker build -t spring-boot:2.0 .'
        } 
