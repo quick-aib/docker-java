@@ -27,7 +27,7 @@ spec:
     spec:
       containers:
       - name: spring-boot
-        image: "devopsjuly22017/spring-boot:1.0 "
+        image: "devopsjuly22017/spring-boot:1.0"
         ports:
         - containerPort: 8080
 ---
