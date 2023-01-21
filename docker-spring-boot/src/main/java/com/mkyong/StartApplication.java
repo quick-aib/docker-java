@@ -13,7 +13,7 @@ public class StartApplication {
     @GetMapping("/")
     public String index(final Model model) {
         model.addAttribute("title", "kubernetes + Spring Boot");
-        model.addAttribute("msg", "Welcome to the docker container!");
+        model.addAttribute("msg", "Welcome to the k8s container!");
         return "index";
     }
 
