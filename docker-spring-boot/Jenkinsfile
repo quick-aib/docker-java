@@ -22,10 +22,11 @@ node {
        } 
     }
     stage('docker push') {
-       
-            sh 'docker tag spring-boot:1.0 devopsjuly22017/spring-boot:1.0'
-            sh 'docker push devopsjuly22017/spring-boot:1.0'
-       
+      withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
+        sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
+        sh 'docker tag spring-boot:1.0 devopsjuly22017/spring-boot:1.0'
+        sh 'docker push devopsjuly22017/spring-boot:1.0'
+      }
     }
     stage('docker run') {
         dir("docker-spring-boot") {
