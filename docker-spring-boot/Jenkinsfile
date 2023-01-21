@@ -24,8 +24,8 @@ node {
     stage('docker push') {
       withCredentials([usernamePassword(credentialsId: 'dockerHub', passwordVariable: 'dockerHubPassword', usernameVariable: 'dockerHubUser')]) {
         sh "docker login -u ${env.dockerHubUser} -p ${env.dockerHubPassword}"
-        sh 'docker tag spring-boot:1.0 devopsjuly22017/spring-boot:1.0'
-        sh 'docker push devopsjuly22017/spring-boot:1.0'
+        sh 'docker tag spring-boot:2.0 devopsjuly22017/spring-boot:2.0'
+        sh 'docker push devopsjuly22017/spring-boot:2.0'
       }
     }
 //     stage('docker run') {
