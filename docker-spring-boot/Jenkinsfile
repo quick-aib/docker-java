@@ -37,8 +37,21 @@ node {
 //        } 
 //     }
      stage('deploy') {
+        
        dir("docker-spring-boot") {
            withCredentials([file(credentialsId: 'KUBECONFIGID', variable: 'KUBECONFIG')]) {
+               def userInput = input(
+                            id: 'userInput', message: 'select environment:?',
+                            parameters: [
+
+                                    string(defaultValue: 'dev',
+                                            description: 'dev value',
+                                            name: 'stage'),
+                                    string(defaultValue: 'dev',
+                                            description: 'prod value',
+                                            name: 'prod'),
+                            ])
+                echo "env:  $userInput"
                 sh 'kubectl get node'
                 //sh 'kubectl run sba --image=devopsjuly22017/spring-boot:1.0 --port=8080'
                 //sh 'kubectl expose pod sba --port=81 --target-port=8080 –nodePort=31710 --name=svc1 --type=NodePort'
