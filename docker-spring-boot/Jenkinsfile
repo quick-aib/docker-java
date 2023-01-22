@@ -39,7 +39,7 @@ node {
     stage('dev deploy'){
          def deploy = input message: 'User input required', ok: 'deployenv!',
                             parameters: [choice(name: 'deploy', choices: 'Yes\nNo', description: 'do you want to proceed?')
-         echo $deploy
+         echo "$deploy"
      }
      stage('deploy') {
         
