@@ -53,7 +53,7 @@ node {
                 //sh 'kubectl run sba --image=devopsjuly22017/spring-boot:1.0 --port=8080'
                 //sh 'kubectl expose pod sba --port=81 --target-port=8080 –nodePort=31710 --name=svc1 --type=NodePort'
                sh 'kubectl delete -f springboot-k8s-deployment-"${userInput}".yml'
-               sh 'kubectl apply -f springboot-k8s-deployment-"${userInput}".yml'
+               sh "i=${userInput};" + 'kubectl apply -f springboot-k8s-deployment-"$i".yml'
            }
        }
     }
