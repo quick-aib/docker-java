@@ -36,6 +36,11 @@ node {
 // //             sh 'docker run -d -p 8083:8080 --name=sba1 -t spring-boot:1.0'
 //        } 
 //     }
+    stage('dev deploy'){
+         def deploy = input message: 'User input required', ok: 'deployenv!',
+                            parameters: [choice(name: 'deploy', choices: 'Yes\nNo, description: 'do you want to proceed?')
+         echo $deploy
+     }
      stage('deploy') {
         
        dir("docker-spring-boot") {
